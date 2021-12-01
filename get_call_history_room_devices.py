@@ -19,6 +19,7 @@ import json
 import csv
 import os
 import time
+import datetime as dt
 from requests_oauthlib import OAuth2Session
 from dotenv import load_dotenv
 
@@ -139,8 +140,9 @@ def get_place_device_info(_token, _counter):
     return device_info
 
 
+
 # Generates the CVS file for all registered room devices
-with open('place_device_report.csv', 'w', newline='') as f:
+with open(f'place_device_report_{dt.datetime.now().strftime("%Y-%m-%d_%X")}.csv', 'w', newline='') as f:
     writer = csv.writer((f))
     writer.writerow(['Device Name','Duration (In Seconds)', 'StartTime', 'EndTime', 'PeopleCunt', 'Device Id'])
     for device in range(len(place_device_list)):
@@ -152,5 +154,7 @@ with open('place_device_report.csv', 'w', newline='') as f:
             print('   writing out history for device....')
             for entry in response['result']['Entry']:
                 writer.writerow(([place_device_name[device], entry['Duration'], entry['StartTime'], entry['EndTime'],entry['RoomAnalytics']['PeopleCount'], response['deviceId']]))
+        elif 'Entry' not in response['result']:
+            print('   Device has no call history, skipping....')
         else:
-            print('Unknown error')
+            print('   Unknown error, skipping....')
