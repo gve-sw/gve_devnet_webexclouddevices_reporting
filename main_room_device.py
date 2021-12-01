@@ -58,7 +58,11 @@ with open('place_device_report.csv', 'w', newline='') as f:
             for entry in response['result']['Entry']:
                 writer.writerow(([place_device_name[device], entry['Duration'], entry['StartTime'], entry['EndTime'],entry['RoomAnalytics']['PeopleCount'], response['deviceId']]))
         except KeyError:
+            print('---------- Key Error detected for ----------')
+            print(f'Device Name: {place_device_name[device]}')
+            print(f"Device ID: {place_device_list[device]}")
             pass
         except IndexError:
+            print(f'Device with Index Error: {place_device_name[device]}')
             pass
 

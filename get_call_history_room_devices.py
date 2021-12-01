@@ -148,9 +148,9 @@ with open('place_device_report.csv', 'w', newline='') as f:
         print('Processing device ',place_device_name[device],end='')
         if 'errors' in response:
            print('   Error!: ',response['errors'][0]['description'],' , skipping....')
-        else:
+        elif 'result' in response and 'Entry' in response['result']:
             print('   writing out history for device....')
             for entry in response['result']['Entry']:
                 writer.writerow(([place_device_name[device], entry['Duration'], entry['StartTime'], entry['EndTime'],entry['RoomAnalytics']['PeopleCount'], response['deviceId']]))
-
-
+        else:
+            print('Unknown error')
