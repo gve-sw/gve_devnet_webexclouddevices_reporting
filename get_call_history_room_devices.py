@@ -140,9 +140,8 @@ def get_place_device_info(_token, _counter):
     return device_info
 
 
-
 # Generates the CVS file for all registered room devices
-with open(f'place_device_report_{dt.datetime.now().strftime("%Y-%m-%d_%X")}.csv', 'w', newline='') as f:
+with open(f'place_device_report_{dt.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.csv', 'w', newline='') as f:
     writer = csv.writer((f))
     writer.writerow(['Device Name','Duration (In Seconds)', 'StartTime', 'EndTime', 'PeopleCunt', 'Device Id'])
     for device in range(len(place_device_list)):
