@@ -11,8 +11,8 @@ Jinja2
 MarkupSafe
 oauthlib
 requests-oauthlib==1.0.0
-requests-toolbelt==0.8.0
+requests-toolbelt==0.9.1
 webexteamssdk
 Werkzeug
-flask==1.1.1
+flask==2.1.2
 python-dotenv
